@@ -37,7 +37,7 @@ public class TestMode {
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
         var registeredUser = getRegisteredUser("active");
         var login = registeredUser.getLogin();
-        var password =registeredUser.getPassword();
+        var password = registeredUser.getPassword();
         $("[data-test-id='login'] .input__box .input__control").setValue(login);
         $("[data-test-id='password'] .input__box .input__control").setValue(password);
         $("[data-test-id='action-login'] .button__text").click();
@@ -56,7 +56,6 @@ public class TestMode {
         $("[data-test-id='password'] .input__box .input__control").setValue(password);
         $("[data-test-id='action-login'] .button__text").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"));
-
     }
 
     @Test
@@ -64,11 +63,11 @@ public class TestMode {
     void shouldGetErrorIfBlockedUser() {
         var blockedUser = getRegisteredUser("blocked");
         var login = blockedUser.getLogin();
-        var password =blockedUser.getPassword();
+        var password = blockedUser.getPassword();
         $("[data-test-id='login'] .input__box .input__control").setValue(login);
         $("[data-test-id='password'] .input__box .input__control").setValue(password);
         $("[data-test-id='action-login'] .button__text").click();
-        $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"));
+        $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Пользователь заблокирован"));
     }
 
     @Test

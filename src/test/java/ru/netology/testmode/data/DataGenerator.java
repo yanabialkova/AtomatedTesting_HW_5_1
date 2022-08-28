@@ -20,20 +20,15 @@ public class DataGenerator {
             .build();
     private static final Faker faker = new Faker(new Locale("en"));
 
-    private DataGenerator() {
-    }
-
+    private DataGenerator() { }
     private static void sendRequest(RegistrationDto user) {
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new RegistrationDto("vasya", "password", "active")) // передаём в теле объект, который будет преобразован в JSON
+                .body(new RegistrationDto(user.getLogin(), user.getPassword(), user.getStatus())) // передаём в теле объект, который будет преобразован в JSON
                 .when() // "когда"
                 .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
                 .statusCode(200); // код 200 OK
-        // TODO: отправить запрос на указанный в требованиях path, передав в body запроса объект user
-        //  и не забудьте передать подготовленную спецификацию requestSpec.
-        //  Пример реализации метода показан в условии к задаче.
     }
 
     public static String getRandomLogin() {
@@ -58,8 +53,6 @@ public class DataGenerator {
         public static RegistrationDto getRegisteredUser(String status) {
             RegistrationDto registeredUser = getUser(status);
             sendRequest(registeredUser);
-            // TODO: объявить переменную registeredUser и присвоить ей значение возвращённое getUser(status).
-            // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)
             return registeredUser;
         }
     }
