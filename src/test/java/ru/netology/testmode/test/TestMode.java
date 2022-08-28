@@ -32,7 +32,6 @@ public class TestMode {
         clearBrowserLocalStorage();
     }
 
-
     @Test
     @DisplayName("Should successfully login with active registered user")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
@@ -42,10 +41,9 @@ public class TestMode {
         $("[data-test-id='login'] .input__box .input__control").setValue(login);
         $("[data-test-id='password'] .input__box .input__control").setValue(password);
         $("[data-test-id='action-login'] .button__text").click();
-
-        // TODO: добавить логику теста, в рамках которого будет выполнена попытка входа в личный кабинет с учётными
-        //  данными зарегистрированного активного пользователя, для заполнения полей формы используйте
-        //  пользователя registeredUser
+        $(".heading")
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.exactText("Личный кабинет"));
     }
 
     @Test
@@ -59,8 +57,6 @@ public class TestMode {
         $("[data-test-id='action-login'] .button__text").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"));
 
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет
-        //  незарегистрированного пользователя, для заполнения полей формы используйте пользователя notRegisteredUser
     }
 
     @Test
@@ -73,9 +69,6 @@ public class TestMode {
         $("[data-test-id='password'] .input__box .input__control").setValue(password);
         $("[data-test-id='action-login'] .button__text").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"));
-
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет,
-        //  заблокированного пользователя, для заполнения полей формы используйте пользователя blockedUser
     }
 
     @Test
@@ -89,9 +82,6 @@ public class TestMode {
         $("[data-test-id='action-login'] .button__text").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"));
 
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
-        //  логином, для заполнения поля формы "Логин" используйте переменную wrongLogin,
-        //  "Пароль" - пользователя registeredUser
     }
 
     @Test
@@ -106,8 +96,5 @@ public class TestMode {
         $("[data-test-id='action-login'] .button__text").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.exactText("Ошибка! " + "Неверно указан логин или пароль"));
 
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
-        //  паролем, для заполнения поля формы "Логин" используйте пользователя registeredUser,
-        //  "Пароль" - переменную wrongPassword
     }
 }
